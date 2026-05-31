@@ -14,6 +14,11 @@ function ChangePassword() {
       return
     }
 
+    if (newPassword.length < 6) {
+      alert('Password baru minimal 6 karakter')
+      return
+    }
+
     if (newPassword !== confirmPassword) {
       alert('Konfirmasi password tidak cocok')
       return
@@ -60,61 +65,52 @@ function ChangePassword() {
   }
 
   return (
-    <div className="flex justify-center py-10">
+    <div className="flex justify-center px-4 py-10">
 
-      <div className="w-full max-w-2xl rounded-3xl border border-white/10 bg-white/10 p-10 shadow-2xl backdrop-blur-xl">
+      <div className="w-full max-w-2xl rounded-[35px] border border-white/40 bg-white/85 p-6 shadow-2xl backdrop-blur-2xl md:p-10">
 
-        <h1 className="mb-8 text-center text-4xl font-bold text-white">
+        {/* TITLE */}
+        <h1 className="mb-10 text-center text-3xl font-extrabold text-pink-600 md:text-5xl">
           Ganti Password
         </h1>
 
+        {/* FORM */}
         <div className="space-y-5">
 
+          {/* PASSWORD LAMA */}
           <input
             type="password"
             placeholder="Masukkan Password Lama"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
-            className="w-full rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-white outline-none transition placeholder:text-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20"
+            className="w-full rounded-2xl border border-pink-200 bg-white px-5 py-4 text-lg font-medium text-slate-800 outline-none transition duration-300 placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20"
           />
 
+          {/* PASSWORD BARU */}
           <input
             type="password"
             placeholder="Masukkan Password Baru"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-white outline-none transition placeholder:text-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20"
+            className="w-full rounded-2xl border border-pink-200 bg-white px-5 py-4 text-lg font-medium text-slate-800 outline-none transition duration-300 placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20"
           />
 
+          {/* KONFIRMASI PASSWORD */}
           <input
             type="password"
             placeholder="Konfirmasi Password Baru"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-white outline-none transition placeholder:text-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20"
+            className="w-full rounded-2xl border border-pink-200 bg-white px-5 py-4 text-lg font-medium text-slate-800 outline-none transition duration-300 placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20"
           />
 
+          {/* BUTTON */}
           <button
             onClick={handleChangePassword}
-            className="w-full rounded-2xl bg-cyan-500 py-4 font-semibold text-white shadow-lg transition duration-300 hover:scale-[1.02] hover:bg-cyan-600"
+            className="w-full rounded-2xl bg-gradient-to-r from-cyan-500 to-sky-500 py-4 text-lg font-bold text-white shadow-xl transition duration-300 hover:scale-[1.02] hover:from-cyan-600 hover:to-sky-600"
           >
             Simpan Password
           </button>
-
-          <div className="pt-4 text-center">
-
-            <button
-              className="text-cyan-300 transition hover:text-cyan-200"
-              onClick={() =>
-                alert(
-                  'Silakan hubungi petugas Kecamatan Medan Petisah untuk reset password.'
-                )
-              }
-            >
-              Lupa Password?
-            </button>
-
-          </div>
 
         </div>
 

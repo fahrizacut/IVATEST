@@ -1,131 +1,112 @@
-import { useState } from 'react'
+import {
+  LayoutDashboard,
+  ShieldCheck,
+  User,
+  KeyRound,
+} from 'lucide-react'
 
 type SidebarProps = {
-  onLogout: () => void
+
   menu: string
   setMenu: (menu: string) => void
+  nama: string
 }
 
 function Sidebar({
-  onLogout,
   menu,
   setMenu,
+  nama
 }: SidebarProps) {
 
-  const [open, setOpen] = useState(false)
+  const menus = [
+    {
+      id: 'dashboard',
+      title: 'Dashboard',
+      icon: <LayoutDashboard size={26} />
+    },
+    {
+      id: 'status-IVATest',
+      title: 'Status IVATest',
+      icon: <ShieldCheck size={26} />
+    },
+    {
+      id: 'profile',
+      title: 'Profile',
+      icon: <User size={26} />
+    },
+    {
+      id: 'tempat-layanan',
+      title: 'Tempat Layanan',
+      icon: <User size={26} />
+    },
+    {
+      id: 'change-password',
+      title: 'Ganti Password',
+      icon: <KeyRound size={26} />
+    }
+  ]
 
   return (
-    <div className="hidden min-h-screen w-72 border-r border-white/10 bg-white/10 p-6 backdrop-blur-xl lg:block">
+    <div className="relative w-full border-r border-white/30 bg-white/50 p-5 shadow-2xl backdrop-blur-3xl md:min-h-screen md:w-[340px]">
+
 
       {/* LOGO */}
-      <h1 className="mb-8 text-5xl font-bold tracking-wide text-cyan-300">
-        IVATEST
-      </h1>
+      <div className="mb-10">
 
-      {/* PROFILE */}
-      <div className="relative mb-10">
+        <h1 className="text-center text-5xl font-black tracking-wide text-cyan-500 drop-shadow-md md:text-7xl">
+          
+        </h1>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex w-full items-center justify-between rounded-3xl border border-white/10 bg-white/10 p-4 transition hover:bg-white/20"
-        >
+      </div>
 
-          <div className="flex items-center gap-3">
+      {/* USER CARD */}
+      <div className="mb-10 rounded-[35px] border border-white/40 bg-white/90 p-5 shadow-xl">
 
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-400 text-xl font-bold text-slate-900">
-              P
-            </div>
+        <div className="flex items-center gap-4">
 
-            <div className="text-left">
-              <h2 className="font-semibold text-white">
-                Pengguna
-              </h2>
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-cyan-400 text-5xl font-black text-black shadow-lg">
+            {nama?.charAt(0).toUpperCase()}
+          </div>
 
-              <p className="text-sm text-slate-300">
-                Sistem Kesehatan
-              </p>
-            </div>
+          <div>
+
+            <h2 className="text-3xl font-extrabold text-black">
+              {nama}
+            </h2>
+
+            <p className="text-xl font-semibold text-slate-800">
+              Pengguna
+            </p>
 
           </div>
 
-          <span className="text-white">
-            ▼
-          </span>
-
-        </button>
-
-        {/* DROPDOWN */}
-        {open && (
-          <div className="absolute mt-3 w-full rounded-3xl border border-white/10 bg-slate-900/90 p-3 shadow-2xl backdrop-blur-xl">
-
-            <button
-              onClick={() => {
-                setMenu('profile')
-                setOpen(false)
-              }}
-              className="mb-2 w-full rounded-2xl px-4 py-3 text-left text-white transition hover:bg-white/10"
-            >
-              Profil Pengguna
-            </button>
-
-            <button
-              onClick={() => {
-                setMenu('change-password')
-                setOpen(false)
-              }}
-              className="mb-2 w-full rounded-2xl px-4 py-3 text-left text-white transition hover:bg-white/10"
-            >
-              Ganti Password
-            </button>
-
-            <button
-              onClick={onLogout}
-              className="w-full rounded-2xl bg-red-500/20 px-4 py-3 text-left text-red-200 transition hover:bg-red-500/30"
-            >
-              Logout
-            </button>
-
-          </div>
-        )}
+        </div>
 
       </div>
 
       {/* MENU */}
-      <div className="space-y-4">
+      <div className="flex flex-col gap-5">
 
-        {/* DASHBOARD */}
-        <button
-          onClick={() => setMenu('dashboard')}
-          className={`w-full rounded-2xl px-4 py-3 text-left text-white transition ${
-            menu === 'dashboard'
-              ? 'bg-cyan-500/20'
-              : 'bg-white/5 hover:bg-white/10'
-          }`}
-        >
-          Dashboard
-        </button>
+        {menus.map((item) => (
 
-        {/* STATUS VAKSIN */}
-        <button
-          onClick={() => setMenu('status-vaksin')}
-          className={`w-full rounded-2xl px-4 py-3 text-left text-white transition ${
-            menu === 'status-vaksin'
-              ? 'bg-cyan-500/20'
-              : 'bg-white/5 hover:bg-white/10'
-          }`}
-        >
-          Status Vaksin
-        </button>
+          <button
+            key={item.id}
+            onClick={() => setMenu(item.id)}
+            className={`flex items-center gap-5 rounded-[30px] px-8 py-7 text-2xl font-bold transition duration-300
 
-        {/* IVA TEST */}
-        <button className="w-full rounded-2xl bg-white/5 px-4 py-3 text-left text-white transition hover:bg-white/10">
-          IVA Test
-        </button>
+              ${menu === item.id
+                ? 'bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white shadow-2xl'
+                : 'bg-white/90 text-slate-900 hover:bg-white hover:scale-[1.01]'}
+            `}
+          >
 
-        {/* JADWAL */}
-        <button className="w-full rounded-2xl bg-white/5 px-4 py-3 text-left text-white transition hover:bg-white/10">
-          Jadwal
-        </button>
+            {item.icon}
+
+            {item.title}
+
+          </button>
+
+        ))}
 
       </div>
 
